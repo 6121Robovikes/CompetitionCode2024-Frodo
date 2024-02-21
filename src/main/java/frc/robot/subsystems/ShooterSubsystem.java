@@ -35,8 +35,9 @@ public class ShooterSubsystem extends SubsystemBase {
       slot0Configs.kD = 0;
 
       var motionMagicConfigs = talonFXConfigs.MotionMagic; 
-      motionMagicConfigs.MotionMagicAcceleration = 0; 
-      motionMagicConfigs.MotionMagicJerk = 4000; 
+      motionMagicConfigs.MotionMagicCruiseVelocity= 1; // 1 rotation per second cruise
+      motionMagicConfigs.MotionMagicAcceleration = 10;  //take 0.5 seconds to reach max velocity
+      motionMagicConfigs.MotionMagicJerk = 50; //value from phoenix examples
       
 
 
