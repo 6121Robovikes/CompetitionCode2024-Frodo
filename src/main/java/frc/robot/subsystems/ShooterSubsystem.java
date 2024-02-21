@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -12,16 +13,35 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OperatorConstants;
 
-public class ShooterSubsytem extends SubsystemBase {
- TalonFX leftShooterMotor = new TalonFX(OperatorConstants.kShooterLeftMotorId); 
- TalonFX rightShooterMotor = new TalonFX(OperatorConstants.kShooterRightMotorId);
+public class ShooterSubsystem extends SubsystemBase {
+ static TalonFX leftShooterMotor = new TalonFX(OperatorConstants.kShooterLeftMotorId); 
+ static TalonFX rightShooterMotor = new TalonFX(OperatorConstants.kShooterRightMotorId);
 
   VoltageOut m_request = new VoltageOut(0);
 
-  public ShooterSubsytem() {
+  public ShooterSubsystem() {
 
-        leftShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
+    leftShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
     rightShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
+
+    var talonFXConfigs = new TalonFXConfiguration(); 
+
+    var slot0Configs = new Slot0Configs();
+      slot0Configs.kS = 0.05; 
+      slot0Configs.kV = 0.12;
+      slot0Configs.kA = 0.01; 
+      slot0Configs.kP = 0.11;
+      slot0Configs.kI = 0;
+      slot0Configs.kD = 0;
+
+      var motionMagicConfigs = talonFXConfigs.MotionMagic; 
+      motionMagicConfigs.MotionMagicAcceleration = 0; 
+      motionMagicConfigs.MotionMagicJerk = 4000; 
+      
+
+
+      leftShooterMotor.getConfigurator().apply(talonFXConfigs);
+      rightShooterMotor.getConfigurator().apply(talonFXConfigs);
 
     leftShooterMotor.setInverted(true);
     rightShooterMotor.setInverted(false);
