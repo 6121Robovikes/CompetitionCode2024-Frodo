@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OperatorConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
- static TalonFX leftShooterMotor = new TalonFX(OperatorConstants.kShooterLeftMotorId); 
- static TalonFX rightShooterMotor = new TalonFX(OperatorConstants.kShooterRightMotorId);
+ static TalonFX leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId); 
+ static TalonFX rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId);
 
   VoltageOut m_request = new VoltageOut(0);
 
@@ -39,7 +39,6 @@ public class ShooterSubsystem extends SubsystemBase {
       motionMagicConfigs.MotionMagicAcceleration = 10;  //take 0.5 seconds to reach max velocity
       motionMagicConfigs.MotionMagicJerk = 50; //value from phoenix examples
       
-
 
       leftShooterMotor.getConfigurator().apply(talonFXConfigs);
       rightShooterMotor.getConfigurator().apply(talonFXConfigs);

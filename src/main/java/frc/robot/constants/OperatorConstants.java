@@ -8,8 +8,17 @@ package frc.robot.constants;
 public class OperatorConstants {
 
 // Shooter
- public static final int kShooterLeftMotorId = 41;
- public static final int kShooterRightMotorId = 42;
+ public static final int ShooterLeftMotorId = 41;
+ public static final int ShooterRightMotorId = 42;
 
-  
+//Intake
+public static final int PivotMotorID = 31;
+public static final int IntakeMotorID = 32;
+public static final int pivotLimitSwitch = 33;
+public static final int intakeLimitSwitch = 34;
+
+//
+public static final int ClimberLeftMotorID = 51;
+public static final int ClimberRigtMotorID = 52;
+
 }
