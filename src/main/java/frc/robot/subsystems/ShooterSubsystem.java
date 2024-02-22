@@ -14,17 +14,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OperatorConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
- static TalonFX leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId); 
- static TalonFX rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId);
+ private final TalonFX leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId); 
+ private final TalonFX rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId);
 
   VoltageOut m_request = new VoltageOut(0);
 
+  
   public ShooterSubsystem() {
-
+    
     leftShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
     rightShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
 
-    var talonFXConfigs = new TalonFXConfiguration(); 
+    var talonFXConfigs = new TalonFXConfiguration();
 
     var slot0Configs = new Slot0Configs();
       slot0Configs.kS = 0.05; 
@@ -34,14 +35,16 @@ public class ShooterSubsystem extends SubsystemBase {
       slot0Configs.kI = 0;
       slot0Configs.kD = 0;
 
-      var motionMagicConfigs = talonFXConfigs.MotionMagic; 
-      motionMagicConfigs.MotionMagicCruiseVelocity= 1; // 1 rotation per second cruise
-      motionMagicConfigs.MotionMagicAcceleration = 10;  //take 0.5 seconds to reach max velocity
-      motionMagicConfigs.MotionMagicJerk = 50; //value from phoenix examples
+     var motionMagicConfigs = talonFXConfigs.MotionMagic;
+     motionMagicConfigs.MotionMagicCruiseVelocity = 80; //Target cruise voelocity of 80 rps
+     motionMagicConfigs.MotionMagicAcceleration = 160; // Target acceleratopn of 160 rps/s (0.5 seconds)
+     motionMagicConfigs.MotionMagicJerk = 1600; // Target jerk of 1600 rps/s/s (0.1 seconds)
+
+     leftShooterMotor.getConfigurator().apply(talonFXConfigs);
+     rightShooterMotor.getConfigurator().apply(talonFXConfigs);
       
 
-      leftShooterMotor.getConfigurator().apply(talonFXConfigs);
-      rightShooterMotor.getConfigurator().apply(talonFXConfigs);
+  
 
     leftShooterMotor.setInverted(true);
     rightShooterMotor.setInverted(false);

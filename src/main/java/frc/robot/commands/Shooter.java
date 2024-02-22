@@ -4,6 +4,9 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+
+import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -11,16 +14,29 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class Shooter extends Command {
     private final ShooterSubsystem ShooterSubsystem;
     
+    
     public Shooter(ShooterSubsystem shooterSubsystem) {
-        this.ShooterSubsystem = shooterSubsystem;
-        addRequirements(shooterSubsystem);
+        ShooterSubsystem = shooterSubsystem;
+        addRequirements(ShooterSubsystem);
     }
 
+
+
     @Override
-    public void initialize() {}
+    public void initialize() {
+      
+    }
     
     @Override
     public void execute() {
 
+      // SET SPEED!
+    ShooterSubsystem.setControl(MotionMagicCruiseVelocity);
+
+    }
+
+    @Override
+    public boolean isFinished() {
+      return true;
     }
 }

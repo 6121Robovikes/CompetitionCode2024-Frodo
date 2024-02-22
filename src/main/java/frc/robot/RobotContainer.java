@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CommandSwerveDrivetrain;
 import frc.robot.constants.TunerConstants;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
   private double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
@@ -54,11 +55,15 @@ public class RobotContainer {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
+
+    //Operator subsytems
+    ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+
   }
 
 
 
-  
+
   public RobotContainer() {
     configureBindings();
   }
