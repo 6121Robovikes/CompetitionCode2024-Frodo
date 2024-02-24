@@ -4,22 +4,19 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-
-import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
-/** Add your docs here. */
-public class Shooter extends Command {
-    private final ShooterSubsystem ShooterSubsystem;
-    
-    
-    public Shooter(ShooterSubsystem shooterSubsystem) {
-        ShooterSubsystem = shooterSubsystem;
-        addRequirements(ShooterSubsystem);
-    }
 
+public class Shoot extends Command {
+    
+  ShooterSubsystem m_shooter;
+
+  public Shoot(ShooterSubsystem m_shooter) {
+       
+    
+        addRequirements(m_shooter);
+    }
 
 
     @Override
@@ -30,8 +27,7 @@ public class Shooter extends Command {
     @Override
     public void execute() {
 
-      // SET SPEED!
-    ShooterSubsystem.setControl(MotionMagicCruiseVelocity);
+    m_shooter.shoot();
 
     }
 

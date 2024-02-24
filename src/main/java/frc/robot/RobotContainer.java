@@ -15,17 +15,30 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CommandSwerveDrivetrain;
+import frc.robot.commands.Shoot;
 import frc.robot.constants.TunerConstants;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
+
+   //robot's  subsystems are defined here
+  public static Joystick m_joystick = new Joystick(1);
+  private static final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private static final PivotSubsystem m_pivot = new PivotSubsystem();
+  private static final ClimberSubsystem m_climb = new ClimberSubsystem();
+
+
+  //drivetrain stuff... don't mess with it
   private double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
   private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
   /* Setting up bindings for necessary control of the swerve drive platform */
-  private final CommandXboxController controller = new CommandXboxController(0); // My controller
-  public static Joystick joystick = new Joystick(1);
+  private final CommandXboxController m_controller = new CommandXboxController(0); // My controller
+
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -37,27 +50,34 @@ public class RobotContainer {
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
   private void configureBindings() {
+
+    //drivetrain bindings
     drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-        drivetrain.applyRequest(() -> drive.withVelocityX(-controller.getLeftY() * MaxSpeed) // Drive forward with
+        drivetrain.applyRequest(() -> drive.withVelocityX(-m_controller.getLeftY() * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
-            .withVelocityY(-controller.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-            .withRotationalRate(-controller.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+            .withVelocityY(-m_controller.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(-m_controller.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ));
 
-   controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
-   controller.b().whileTrue(drivetrain
-        .applyRequest(() -> point.withModuleDirection(new Rotation2d(-controller.getLeftY(), -controller.getLeftX()))));
+   m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
+   m_controller.b().whileTrue(drivetrain
+        .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_controller.getLeftY(), -m_controller.getLeftX()))));
 
     // reset the field-centric heading on left bumper press
-    controller.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    m_controller.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
 
-    //Operator subsytems
-    ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  
+    //operator bindings
+
+    JoystickButton shoot = new JoystickButton (m_joystick, 10);
+    shoot.onTrue(new Shoot(m_shooter));
+
+  
 
   }
 
@@ -66,6 +86,9 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureBindings();
+
+
+
   }
 
   public Command getAutonomousCommand() {

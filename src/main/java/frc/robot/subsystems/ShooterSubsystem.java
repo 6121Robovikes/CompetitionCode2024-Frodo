@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -14,80 +15,61 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OperatorConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
- private final TalonFX leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId); 
- private final TalonFX rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId);
-
-  VoltageOut m_request = new VoltageOut(0);
+ TalonFX m_leftShooterMotor; 
+ TalonFX m_rightShooterMotor;
+ VoltageOut m_request = new VoltageOut(0);
 
   
   public ShooterSubsystem() {
     
-    leftShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
-    rightShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
+    m_leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId); 
+    m_rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId);
+
+    m_leftShooterMotor.setInverted(true);
+    m_rightShooterMotor.setInverted(false);
+   
+
+    m_leftShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
+    m_rightShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
+
 
     var talonFXConfigs = new TalonFXConfiguration();
 
     var slot0Configs = new Slot0Configs();
-      slot0Configs.kS = 0.05; 
-      slot0Configs.kV = 0.12;
-      slot0Configs.kA = 0.01; 
-      slot0Configs.kP = 0.11;
+      slot0Configs.kS = 0.25; //.25 V outpot to overcome static friction
+      slot0Configs.kV = 0.12; //A velocity target of 1 rps results in a 0.12 V output
+      slot0Configs.kA = 0.01; //An acceldration of 1 rps/s requires 0.01 V output
+      slot0Configs.kP = 0.11; // /An error of 1 prs rsults in 0.11 V output
       slot0Configs.kI = 0;
       slot0Configs.kD = 0;
 
-     var motionMagicConfigs = talonFXConfigs.MotionMagic;
-     motionMagicConfigs.MotionMagicCruiseVelocity = 80; //Target cruise voelocity of 80 rps
-     motionMagicConfigs.MotionMagicAcceleration = 160; // Target acceleratopn of 160 rps/s (0.5 seconds)
-     motionMagicConfigs.MotionMagicJerk = 1600; // Target jerk of 1600 rps/s/s (0.1 seconds)
+     m_leftShooterMotor.getConfigurator().apply(slot0Configs);
+     m_rightShooterMotor.getConfigurator().apply(slot0Configs);
 
-     leftShooterMotor.getConfigurator().apply(talonFXConfigs);
-     rightShooterMotor.getConfigurator().apply(talonFXConfigs);
-      
-
-  
-
-    leftShooterMotor.setInverted(true);
-    rightShooterMotor.setInverted(false);
-
-  }
-
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  public Command exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
-  }
-
-  /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
-   *
-   * @return value of some boolean subsystem state, such as a digital sensor.
-   */
-  public boolean exampleCondition() {
-    // Query some boolean state, such as a digital sensor.
-    return false;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+
+  VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
   }
 
-  public void set(double left_speed, double right_speed) {
-    leftShooterMotor.setControl(m_request.withOutput(12.0));
-    rightShooterMotor.setControl(m_request.withOutput(12.0));
+  public void shoot() {
+
+    //Set velocity to 8rps, add 0.5 V to overcome gravity
+
+    m_leftShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.5));
+    m_rightShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.05));
  }
  
- public void stop(){
-  leftShooterMotor.setControl(m_request.withOutput(0.0));
-  rightShooterMotor.setControl(m_request.withOutput(0.0));
+  public void stop(){
+    m_leftShooterMotor.setControl(m_request.withVelociy(0));
+    m_rightShooterMotor.setControl(m_request.withVelocity(0));
+  }
+
+  public boolean exampleCondition() {
+    // Query some boolean state, such as a digital sensor.
+    return false;
   }
   
 }

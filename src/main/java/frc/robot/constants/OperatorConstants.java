@@ -17,7 +17,7 @@ public static final int IntakeMotorID = 32;
 public static final int pivotLimitSwitch = 33;
 public static final int intakeLimitSwitch = 34;
 
-//
+// Climber
 public static final int ClimberLeftMotorID = 51;
 public static final int ClimberRigtMotorID = 52;
 
