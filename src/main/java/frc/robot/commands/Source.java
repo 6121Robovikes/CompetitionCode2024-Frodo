@@ -13,7 +13,7 @@ public class Source extends Command {
 
   PivotSubsystem m_pivot;
 
-  double sourcePosition = 0; //determin this position 
+  double sourcePosition = 0; //determine this position 
 
   public Source(PivotSubsystem m_pivot) {
     this.m_pivot = m_pivot;

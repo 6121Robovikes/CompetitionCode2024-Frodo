@@ -10,24 +10,19 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OperatorConstants;
 
 public class PivotSubsystem extends SubsystemBase {
 
   TalonFX m_pivotMotor;
-  DigitalInput m_pivotLimitSwitch;  
   TalonFX m_intakeMotor;
-  DigitalInput m_intakeLimitSwitch; 
 
 
   public PivotSubsystem() {
 
     m_pivotMotor = new TalonFX(OperatorConstants.PivotMotorID); 
     m_intakeMotor = new TalonFX(OperatorConstants.IntakeMotorID);
-    m_pivotLimitSwitch = new DigitalInput(OperatorConstants.pivotLimitSwitch); 
-    m_intakeLimitSwitch = new DigitalInput(OperatorConstants.intakeLimitSwitch); 
     
     // Factory default on motors
     m_pivotMotor.getConfigurator().apply(new TalonFXConfiguration());
