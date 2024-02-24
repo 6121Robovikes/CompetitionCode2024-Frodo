@@ -29,20 +29,17 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightShooterMotor.setInverted(false);
    
 
-   
-
     var slot0Configs = new Slot0Configs();
-      slot0Configs.kS = 0.25; //.25 V outpot to overcome static friction
+      slot0Configs.kS = 0.5; //.5 V outpot to overcome static friction
       slot0Configs.kV = 0.12; //A velocity target of 1 rps results in a 0.12 V output
       slot0Configs.kA = 0.01; //An acceleration of 1 rps/s requires 0.01 V output
-      slot0Configs.kP = 0.11; // /An error of 1 prs rsults in 0.11 V output
+      slot0Configs.kP = 0.1; 
       slot0Configs.kI = 0;
       slot0Configs.kD = 0;
 
      m_leftShooterMotor.getConfigurator().apply(slot0Configs);
      m_rightShooterMotor.getConfigurator().apply(slot0Configs);
 
-   
   }
 
   @Override

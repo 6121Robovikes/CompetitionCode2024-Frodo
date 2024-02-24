@@ -30,7 +30,7 @@ public class Shoot extends Command {
     public void execute() {
 
     m_shooter.shoot(speed);
-
+    System.out.println("moving the shooter");
     }
 
     @Override

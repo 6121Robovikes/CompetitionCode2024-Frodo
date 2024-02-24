@@ -59,8 +59,10 @@ public class RobotContainer {
             .withVelocityY(-m_controller.getLeftX() * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-m_controller.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ));
-   m_shooter.setDefaultCommand(new Shoot(m_shooter, 8));
-   m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
+   
+        m_shooter.setDefaultCommand(new Shoot(m_shooter, 20));
+   
+        m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
    m_controller.b().whileTrue(drivetrain
         .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_controller.getLeftY(), -m_controller.getLeftX()))));
 
@@ -75,8 +77,8 @@ public class RobotContainer {
   
     //operator bindings
 
+    //stop shooter
     JoystickButton shoot = new JoystickButton (m_joystick, 7);
-    //stop 
     shoot.whileTrue(new Shoot(m_shooter, 0));
 
     JoystickButton Source = new JoystickButton(m_joystick, 2);
