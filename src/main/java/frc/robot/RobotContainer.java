@@ -59,6 +59,8 @@ public class RobotContainer {
             .withVelocityY(-m_controller.getLeftX() * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-m_controller.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ));
+
+
    //default shooterspeed
         m_shooter.setDefaultCommand(new Shoot(m_shooter, 10));
    
@@ -75,12 +77,13 @@ public class RobotContainer {
     drivetrain.registerTelemetry(logger::telemeterize);
 
   
-    //operator bindings
+    //OPERATOR BINDINGS
 
     //stop shooter
-    JoystickButton shoot = new JoystickButton (m_joystick, 7);
-    shoot.whileTrue(new Shoot(m_shooter, 0));
+   // JoystickButton shoot = new JoystickButton (m_joystick, 7);
+   // shoot.whileTrue(new Shoot(m_shooter, 0));
 
+    //move arm to source
     JoystickButton Source = new JoystickButton(m_joystick, 2);
     Source.whileTrue(new Source(m_pivot));
 

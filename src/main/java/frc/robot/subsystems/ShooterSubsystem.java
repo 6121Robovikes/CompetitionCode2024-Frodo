@@ -56,13 +56,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightShooterMotor.setControl(m_request.withVelocity(speed));
  }
  
-  public void stop(){
-
-    final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
-
-    m_leftShooterMotor.setControl(m_request.withVelocity(0));
-    m_rightShooterMotor.setControl(m_request.withVelocity(0));
-  }
+  
 
   public boolean exampleCondition() {
     // Query some boolean state, such as a digital sensor.
