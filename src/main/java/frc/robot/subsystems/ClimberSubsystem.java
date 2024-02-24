@@ -18,7 +18,7 @@ public class ClimberSubsystem extends SubsystemBase{
         //factory default both motors
    
 
-  //add Position control
+        //add Position control
 
   }
 

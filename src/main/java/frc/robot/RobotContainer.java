@@ -59,8 +59,8 @@ public class RobotContainer {
             .withVelocityY(-m_controller.getLeftX() * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-m_controller.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ));
-   
-        m_shooter.setDefaultCommand(new Shoot(m_shooter, 20));
+   //default shooterspeed
+        m_shooter.setDefaultCommand(new Shoot(m_shooter, 10));
    
         m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
    m_controller.b().whileTrue(drivetrain
