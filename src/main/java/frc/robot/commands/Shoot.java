@@ -12,9 +12,11 @@ public class Shoot extends Command {
     
   ShooterSubsystem m_shooter;
 
-  public Shoot(ShooterSubsystem m_shooter) {
-       
-    
+  double speed;
+
+  public Shoot(ShooterSubsystem m_shooter, double speed) {
+       this.speed = speed;
+       this.m_shooter = m_shooter;
         addRequirements(m_shooter);
     }
 
@@ -27,7 +29,7 @@ public class Shoot extends Command {
     @Override
     public void execute() {
 
-    m_shooter.shoot();
+    m_shooter.shoot(speed);
 
     }
 

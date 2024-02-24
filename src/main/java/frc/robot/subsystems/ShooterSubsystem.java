@@ -29,11 +29,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightShooterMotor.setInverted(false);
    
 
-    m_leftShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
-    m_rightShooterMotor.getConfigurator().apply(new TalonFXConfiguration());
-
-
-    var talonFXConfigs = new TalonFXConfiguration();
+   
 
     var slot0Configs = new Slot0Configs();
       slot0Configs.kS = 0.25; //.25 V outpot to overcome static friction
@@ -54,13 +50,13 @@ public class ShooterSubsystem extends SubsystemBase {
  
   }
 
-  public void shoot() {
+  public void shoot(double speed) {
 
     final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
 
     //Set velocity to 8rps, add 0.5 V to overcome gravity
-    m_leftShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.5));
-    m_rightShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.5));
+    m_leftShooterMotor.setControl(m_request.withVelocity(speed));
+    m_rightShooterMotor.setControl(m_request.withVelocity(speed));
  }
  
   public void stop(){
