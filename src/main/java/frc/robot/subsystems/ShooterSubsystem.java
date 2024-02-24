@@ -38,7 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
     var slot0Configs = new Slot0Configs();
       slot0Configs.kS = 0.25; //.25 V outpot to overcome static friction
       slot0Configs.kV = 0.12; //A velocity target of 1 rps results in a 0.12 V output
-      slot0Configs.kA = 0.01; //An acceldration of 1 rps/s requires 0.01 V output
+      slot0Configs.kA = 0.01; //An acceleration of 1 rps/s requires 0.01 V output
       slot0Configs.kP = 0.11; // /An error of 1 prs rsults in 0.11 V output
       slot0Configs.kI = 0;
       slot0Configs.kD = 0;
@@ -46,24 +46,28 @@ public class ShooterSubsystem extends SubsystemBase {
      m_leftShooterMotor.getConfigurator().apply(slot0Configs);
      m_rightShooterMotor.getConfigurator().apply(slot0Configs);
 
+   
   }
 
   @Override
   public void periodic() {
-
-  VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
+ 
   }
 
   public void shoot() {
 
-    //Set velocity to 8rps, add 0.5 V to overcome gravity
+    final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
 
+    //Set velocity to 8rps, add 0.5 V to overcome gravity
     m_leftShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.5));
-    m_rightShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.05));
+    m_rightShooterMotor.setControl(m_request.withVelocity(8).withFeedForward(0.5));
  }
  
   public void stop(){
-    m_leftShooterMotor.setControl(m_request.withVelociy(0));
+
+    final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
+
+    m_leftShooterMotor.setControl(m_request.withVelocity(0));
     m_rightShooterMotor.setControl(m_request.withVelocity(0));
   }
 
