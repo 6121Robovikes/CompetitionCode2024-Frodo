@@ -15,13 +15,15 @@ public class LoadTheShooter extends Command {
 
   double stowPosition = 0;
  
-  public LoadTheShooter(PivotSubsystem m_pivot) {
+  public LoadTheShooter(PivotSubsystem m_pivot) //add intake subsystem
+  
+  {
 
     this.m_pivot = m_pivot;
     this.m_intake = m_intake;
 
     addRequirements(m_pivot, m_intake); 
-    // Use addRequirements() here to declare subsystem dependencies.
+    
   }
 
   // Called when the command is initially scheduled.
@@ -30,8 +32,12 @@ public class LoadTheShooter extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
 
+  m_pivot.setPosition(stowPosition);
+
+
+}
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

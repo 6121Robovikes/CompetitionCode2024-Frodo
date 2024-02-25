@@ -94,7 +94,7 @@ public class RobotContainer {
 
     //move arm to ground, intake in
 
-    //move arm to stow, intake off
+    //mover arm to stow, intake off
 
     //move arm to feed, intake out
 
