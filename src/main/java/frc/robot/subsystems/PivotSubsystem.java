@@ -21,8 +21,8 @@ public class PivotSubsystem extends SubsystemBase {
 
   public PivotSubsystem() {
 
-    m_pivotMotor = new TalonFX(OperatorConstants.PivotMotorID); 
-    m_intakeMotor = new TalonFX(OperatorConstants.IntakeMotorID);
+    m_pivotMotor = new TalonFX(OperatorConstants.PivotMotorID, "Canivore"); 
+    m_intakeMotor = new TalonFX(OperatorConstants.IntakeMotorID, "Canivore");
     
     // Factory default on motors
     m_pivotMotor.getConfigurator().apply(new TalonFXConfiguration());
@@ -45,7 +45,10 @@ public class PivotSubsystem extends SubsystemBase {
    }
 
   public double getPosition() {
-    return m_pivotMotor.getPosition().getValueAsDouble();
+
+
+    System.out.println("rotor Postion"+ m_pivotMotor.getRotorPosition());
+    return m_pivotMotor.getRotorPosition().getValueAsDouble();
   }
 
   @Override

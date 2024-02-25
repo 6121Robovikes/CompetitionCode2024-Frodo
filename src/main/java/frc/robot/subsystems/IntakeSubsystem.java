@@ -16,7 +16,7 @@ TalonFX m_intakeMotor;
 VoltageOut m_request = new VoltageOut(0);
 
 public IntakeSubsystem() {
-    m_intakeMotor = new TalonFX(OperatorConstants.PivotMotorID);
+    m_intakeMotor = new TalonFX(OperatorConstants.PivotMotorID, "canivore");
 
     var slot0Configs = new Slot0Configs();
     slot0Configs.kS = 0.25; //.25 V outpot to overcome static friction

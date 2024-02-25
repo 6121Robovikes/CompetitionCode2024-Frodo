@@ -17,22 +17,22 @@ import frc.robot.constants.OperatorConstants;
 public class ShooterSubsystem extends SubsystemBase {
  TalonFX m_leftShooterMotor; 
  TalonFX m_rightShooterMotor;
- VoltageOut m_request = new VoltageOut(0);
+ //VoltageOut m_request = new VoltageOut(0);
 
   
   public ShooterSubsystem() {
     
-    m_leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId); 
-    m_rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId);
+    m_leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId, "Canivore"); 
+    m_rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId, "Canivore");
 
-    m_leftShooterMotor.setInverted(true);
+    m_leftShooterMotor.setInverted(false);
     m_rightShooterMotor.setInverted(false);
    
 
     var slot0Configs = new Slot0Configs();
-      slot0Configs.kS = 0.5; //.5 V outpot to overcome static friction
+      slot0Configs.kS = 0.05; //.5 V outpot to overcome static friction
       slot0Configs.kV = 0.12; //A velocity target of 1 rps results in a 0.12 V output
-      slot0Configs.kA = 0.01; //An acceleration of 1 rps/s requires 0.01 V output
+      slot0Configs.kA = 0.0; //An acceleration of 1 rps/s requires 0.01 V output
       slot0Configs.kP = 0.1; 
       slot0Configs.kI = 0;
       slot0Configs.kD = 0;
@@ -52,8 +52,10 @@ public class ShooterSubsystem extends SubsystemBase {
     final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
 
     //Set velocity to 8rps, add 0.5 V to overcome gravity
-    m_leftShooterMotor.setControl(m_request.withVelocity(speed));
-    m_rightShooterMotor.setControl(m_request.withVelocity(speed));
+   m_leftShooterMotor.setControl(m_request.withVelocity(-speed));
+   m_rightShooterMotor.setControl(m_request.withVelocity(speed));
+   
+  
  }
  
   

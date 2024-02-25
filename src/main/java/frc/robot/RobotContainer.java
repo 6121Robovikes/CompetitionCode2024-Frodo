@@ -84,7 +84,7 @@ public class RobotContainer {
    // shoot.whileTrue(new Shoot(m_shooter, 0));
 
     //move arm to source
-    JoystickButton Source = new JoystickButton(m_joystick, 2);
+    JoystickButton Source = new JoystickButton(m_joystick, 11);
     Source.whileTrue(new Source(m_pivot));
 
 
