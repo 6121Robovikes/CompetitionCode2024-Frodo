@@ -21,6 +21,7 @@ import frc.robot.commands.Shoot;
 import frc.robot.commands.Source;
 import frc.robot.constants.TunerConstants;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -30,6 +31,7 @@ public class RobotContainer {
   public static Joystick m_joystick = new Joystick(1);
   private static final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private static final PivotSubsystem m_pivot = new PivotSubsystem();
+  //private static final IntakeSubsystem m_intake = new IntakeSubsystem();
   private static final ClimberSubsystem m_climb = new ClimberSubsystem();
 
 

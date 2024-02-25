@@ -13,15 +13,16 @@ import frc.robot.subsystems.PivotSubsystem;
 public class Source extends Command {
 
   PivotSubsystem m_pivot;
-  IntakeSubsystem m_intake;
+  //IntakeSubsystem m_intake;
 
   double sourcePosition = 0; //determine this position 
 
-  public Source(PivotSubsystem m_pivot, IntakeSubsystem m_intake) {
+  public Source(PivotSubsystem m_pivot) //add , IntakeSubsystem m_intake
+  {
     this.m_pivot = m_pivot;
-    this.m_intake = m_intake;
+    //this.m_intake = m_intake;
 
-    addRequirements(m_pivot, m_intake);
+    addRequirements(m_pivot); //add m_intake
     
   }
 

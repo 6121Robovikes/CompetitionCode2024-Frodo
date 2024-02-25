@@ -14,6 +14,12 @@ public class ClimberSubsystem extends SubsystemBase{
     TalonFX m_rightClimb;
 
     public ClimberSubsystem() {
+        m_leftClimb = new TalonFX(OperatorConstants.ClimberLeftMotorID, "Canivore"); 
+        m_rightClimb = new TalonFX(OperatorConstants.ClimberRigtMotorID, "Canivore");
+    
+        m_leftClimb.setInverted(false);
+        m_rightClimb.setInverted(false);
+
 
         //factory default both motors
    
