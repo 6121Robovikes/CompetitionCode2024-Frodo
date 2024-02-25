@@ -22,7 +22,7 @@ public IntakeSubsystem() {
     slot0Configs.kS = 0.25; //.25 V outpot to overcome static friction
     slot0Configs.kV = 0.12; //A velocity target of 1 rps results in a 0.12 V output
     slot0Configs.kA = 0.01; //An acceleration of 1 rps/s requires 0.01 V output
-    slot0Configs.kP = 0.11; // /An error of 1 prs rsults in 0.11 V output
+    slot0Configs.kP = 0.1; // /An error of 1 prs rsults in 0.11 V output
     slot0Configs.kI = 0;
     slot0Configs.kD = 0;
 
@@ -31,18 +31,23 @@ public IntakeSubsystem() {
 @Override
   public void periodic() {
   }
-public void intake(double speed) {
+public void feedIn() {
 
     final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
 
     //Set velocity to 8rps, add 0.5 V to overcome gravity
-    m_intakeMotor.setControl(m_request.withVelocity(speed));
+    m_intakeMotor.setControl(m_request.withVelocity(4));//adjust
 }
-public void stop(){
+public void feedOut() {
 
     final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
+    m_intakeMotor.setControl(m_request.withVelocity(-2));//adjust
+}
 
-    m_intakeMotor.setControl(m_request.withVelocity(0));
+public void ampOut() {
+    
+    final VelocityVoltage m_request = new VelocityVoltage(0).withSlot(0);
+    m_intakeMotor.setControl(m_request.withVelocity(-1.5)); //adjust
 }
 
 public boolean exampleCondition() {

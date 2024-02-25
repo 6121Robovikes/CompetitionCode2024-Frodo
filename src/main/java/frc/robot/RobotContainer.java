@@ -31,7 +31,7 @@ public class RobotContainer {
   public static Joystick m_joystick = new Joystick(1);
   private static final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private static final PivotSubsystem m_pivot = new PivotSubsystem();
-  //private static final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private static final IntakeSubsystem m_intake = new IntakeSubsystem();
   private static final ClimberSubsystem m_climb = new ClimberSubsystem();
 
 
@@ -82,13 +82,21 @@ public class RobotContainer {
     //OPERATOR BINDINGS
 
     //stop shooter
-   // JoystickButton shoot = new JoystickButton (m_joystick, 7);
-   // shoot.whileTrue(new Shoot(m_shooter, 0));
+   JoystickButton shoot = new JoystickButton (m_joystick, 7);
+   shoot.whileTrue(new Shoot(m_shooter, 0));
 
-    //move arm to source
+    //move arm to source, intake in
     JoystickButton Source = new JoystickButton(m_joystick, 11);
     Source.whileTrue(new Source(m_pivot));
 
+
+    //move ar to amp, intake out
+
+    //move arm to ground, intake in
+
+    //move arm to stow, intake off
+
+    //move arm to feed, intake out
 
   }
 

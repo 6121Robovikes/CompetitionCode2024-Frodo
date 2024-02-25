@@ -4,26 +4,26 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 
+public class Ground extends Command {
 
-public class Source extends Command {
+    PivotSubsystem m_pivot;
+    IntakeSubsystem m_intake;
 
-  PivotSubsystem m_pivot;
-  IntakeSubsystem m_intake;
+    double groundPosition = 0; //determine this position 
+    double stowPosition = 0;  //starting position insde frame
 
-  double sourcePosition = 0; //determine this position 
 
-  public Source(PivotSubsystem m_pivot) //add , IntakeSubsystem m_intake
+  public Ground(PivotSubsystem m_pivot) //add , IntakeSubsystem m_intake 
   {
+    
     this.m_pivot = m_pivot;
     this.m_intake = m_intake;
 
     addRequirements(m_pivot, m_intake); 
-    
   }
 
   // Called when the command is initially scheduled.
@@ -33,15 +33,17 @@ public class Source extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  
-    m_pivot.setPosition(sourcePosition);
-    
-  }
 
+  m_pivot.setPosition(groundPosition);
+
+  }
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
 
+  m_pivot.setPosition(stowPosition);
+  
+  }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

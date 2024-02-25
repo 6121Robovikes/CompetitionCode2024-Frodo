@@ -4,26 +4,24 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 
-
-public class Source extends Command {
-
+public class LoadTheShooter extends Command {
+ 
   PivotSubsystem m_pivot;
   IntakeSubsystem m_intake;
 
-  double sourcePosition = 0; //determine this position 
+  double stowPosition = 0;
+ 
+  public LoadTheShooter(PivotSubsystem m_pivot) {
 
-  public Source(PivotSubsystem m_pivot) //add , IntakeSubsystem m_intake
-  {
     this.m_pivot = m_pivot;
     this.m_intake = m_intake;
 
     addRequirements(m_pivot, m_intake); 
-    
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -32,11 +30,7 @@ public class Source extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  
-    m_pivot.setPosition(sourcePosition);
-    
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
