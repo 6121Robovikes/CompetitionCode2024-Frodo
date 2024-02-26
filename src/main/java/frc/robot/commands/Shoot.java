@@ -11,7 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class Shoot extends Command {
     
   ShooterSubsystem m_shooter;
-  double speed = 8;
+  double speed;
 
   public Shoot(ShooterSubsystem m_shooter, double speed) {
        this.speed = speed;

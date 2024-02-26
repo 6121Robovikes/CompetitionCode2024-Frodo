@@ -13,17 +13,16 @@ public class Ground extends Command {
     PivotSubsystem m_pivot;
     IntakeSubsystem m_intake;
 
-    double groundPosition = 0; //determine this position 
-    double stowPosition = 0;  //starting position insde frame
+    double groundPosition = 55; //determine this position 
+    
 
-
-  public Ground(PivotSubsystem m_pivot) //add , IntakeSubsystem m_intake 
+  public Ground(PivotSubsystem m_pivot, IntakeSubsystem m_intake)   
   {
     
     this.m_pivot = m_pivot;
     this.m_intake = m_intake;
 
-    addRequirements(m_pivot, m_intake); 
+    addRequirements(m_pivot, m_intake); //
   }
 
   // Called when the command is initially scheduled.
@@ -34,15 +33,15 @@ public class Ground extends Command {
   @Override
   public void execute() {
 
-  m_pivot.setPosition(groundPosition);
+  //m_pivot.setPosition(groundPosition);
 
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
 
-  m_pivot.setPosition(stowPosition);
-  
+ // m_pivot.setPosition(stowPosition);
+
   }
   // Returns true when the command should end.
   @Override

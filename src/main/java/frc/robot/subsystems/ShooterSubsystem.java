@@ -23,7 +23,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_leftShooterMotor = new TalonFX(OperatorConstants.ShooterLeftMotorId, "Canivore"); 
     m_rightShooterMotor = new TalonFX(OperatorConstants.ShooterRightMotorId, "Canivore");
 
-    m_leftShooterMotor.setInverted(false);
+    m_leftShooterMotor.setInverted(true);
     m_rightShooterMotor.setInverted(false);
    
 
@@ -51,7 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //Set speed in sooter robot container default shooter
     m_leftShooterMotor.setControl(m_request.withVelocity(speed));
-    m_rightShooterMotor.setControl(m_request.withVelocity(-speed));
+    m_rightShooterMotor.setControl(m_request.withVelocity(speed));
  }
  
   

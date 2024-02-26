@@ -38,10 +38,10 @@ public class PivotSubsystem extends SubsystemBase {
   }
   public void setPosition(double position) {
     
-    final PositionVoltage m_request = new PositionVoltage(0).withSlot(0);
+    //final PositionVoltage m_request = new PositionVoltage(0).withSlot(0);
 
     //Change the 0 until arm hold position, also realy hard math so don't do it yet
-    m_pivotMotor.setControl(m_request.withPosition(position).withFeedForward(0));
+    //m_pivotMotor.setControl(m_request.withPosition(position).withFeedForward(0));
 
    }
 

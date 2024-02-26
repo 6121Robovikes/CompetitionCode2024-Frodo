@@ -11,7 +11,7 @@ import frc.robot.subsystems.PivotSubsystem;
 public class LoadTheShooter extends Command {
  
   PivotSubsystem m_pivot;
-  IntakeSubsystem m_intake;
+  //IntakeSubsystem m_intake;
 
   double stowPosition = 0;
  
@@ -20,9 +20,8 @@ public class LoadTheShooter extends Command {
   {
 
     this.m_pivot = m_pivot;
-    this.m_intake = m_intake;
 
-    addRequirements(m_pivot, m_intake); 
+    addRequirements(m_pivot); //, m_intake
     
   }
 
@@ -34,7 +33,7 @@ public class LoadTheShooter extends Command {
   @Override
   public void execute() {
 
-  m_pivot.setPosition(stowPosition);
+  //m_pivot.setPosition(stowPosition);
 
 
 }

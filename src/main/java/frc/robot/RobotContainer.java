@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CommandSwerveDrivetrain;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Source;
+import frc.robot.commands.Ground;
 import frc.robot.constants.TunerConstants;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -64,7 +65,7 @@ public class RobotContainer {
 
 
    //default shooterspeed
-        m_shooter.setDefaultCommand(new Shoot(m_shooter, 20));
+        m_shooter.setDefaultCommand(new Shoot(m_shooter, 80));
    
         m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
    m_controller.b().whileTrue(drivetrain
@@ -84,10 +85,17 @@ public class RobotContainer {
     //stop shooter
    JoystickButton shoot = new JoystickButton (m_joystick, 7);
    shoot.whileTrue(new Shoot(m_shooter, 0));
+   
 
-    //move arm to source, intake in
+
+
+    //move arm to source, intake on
     JoystickButton Source = new JoystickButton(m_joystick, 11);
     Source.whileTrue(new Source(m_pivot));
+
+    JoystickButton Ground = new JoystickButton(m_joystick, 9);
+    Ground.whileTrue(new Ground(m_pivot, m_intake));
+    
 
 
     //move ar to amp, intake out
