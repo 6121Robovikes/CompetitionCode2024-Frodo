@@ -64,7 +64,7 @@ public class RobotContainer {
 
 
    //default shooterspeed
-        m_shooter.setDefaultCommand(new Shoot(m_shooter, 10));
+        m_shooter.setDefaultCommand(new Shoot(m_shooter, 20));
    
         m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
    m_controller.b().whileTrue(drivetrain
