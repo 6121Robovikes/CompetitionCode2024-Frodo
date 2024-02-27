@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.CommandSwerveDrivetrain;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.Source;
+import frc.robot.commands.Stow;
 import frc.robot.commands.Ground;
 import frc.robot.constants.TunerConstants;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -65,7 +66,7 @@ public class RobotContainer {
 
 
    //default shooterspeed
-        m_shooter.setDefaultCommand(new Shoot(m_shooter, 80));
+      //  m_shooter.setDefaultCommand(new Shoot(m_shooter, 80));
    
         m_controller.a().whileTrue(drivetrain.applyRequest(() -> brake));
    m_controller.b().whileTrue(drivetrain
@@ -83,19 +84,23 @@ public class RobotContainer {
     //OPERATOR BINDINGS
 
     //stop shooter
-   JoystickButton shoot = new JoystickButton (m_joystick, 7);
-   shoot.whileTrue(new Shoot(m_shooter, 0));
-   
+    JoystickButton shoot = new JoystickButton (m_joystick, 7);
+    shoot.toggleOnTrue(new Shoot(m_shooter, 20));
+    shoot.toggleOnFalse(new Shoot(m_shooter, 0));
+    
+    
 
-
+  
 
     //move arm to source, intake on
     JoystickButton Source = new JoystickButton(m_joystick, 11);
-    Source.whileTrue(new Source(m_pivot));
+    Source.onTrue(new Source(m_pivot, m_intake));
 
     JoystickButton Ground = new JoystickButton(m_joystick, 9);
-    Ground.whileTrue(new Ground(m_pivot, m_intake));
+    Ground.onTrue(new Ground(m_pivot, m_intake));
     
+    JoystickButton Stow = new JoystickButton(m_joystick, 10);
+    Stow.onTrue(new Stow(m_pivot, m_intake));
 
 
     //move ar to amp, intake out

@@ -5,28 +5,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.PivotSubsystem;
 
 public class Stow extends Command {
 
-  double stowPosition = 0;  //starting position insde frame
+  PivotSubsystem m_pivot;
+  IntakeSubsystem m_intake;
 
-  
-  public Stow() {
+  double stowPosition = 0;  
+
+  public Stow(PivotSubsystem m_pivot, IntakeSubsystem m_intake) 
+  {
+    this.m_pivot = m_pivot;
+    this.m_intake = m_intake;
+
+    addRequirements(m_pivot, m_intake); 
     
   }
 
-
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
-  
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+  
+   m_pivot.setPosition(stowPosition);
+    
+  }
 
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
 
- 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

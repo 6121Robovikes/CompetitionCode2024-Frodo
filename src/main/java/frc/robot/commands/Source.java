@@ -13,16 +13,16 @@ import frc.robot.subsystems.PivotSubsystem;
 public class Source extends Command {
 
   PivotSubsystem m_pivot;
-  //IntakeSubsystem m_intake;
+  IntakeSubsystem m_intake;
 
-  double sourcePosition = 17.75; //determine this position 
+  double sourcePosition = 17.75;  
 
-  public Source(PivotSubsystem m_pivot) //add , IntakeSubsystem m_intake
+  public Source(PivotSubsystem m_pivot, IntakeSubsystem m_intake) 
   {
     this.m_pivot = m_pivot;
-    //this.m_intake = m_intake;
+    this.m_intake = m_intake;
 
-    addRequirements(m_pivot); //, m_intake
+    addRequirements(m_pivot, m_intake); 
     
   }
 
@@ -34,8 +34,8 @@ public class Source extends Command {
   @Override
   public void execute() {
   
-   //m_pivot.setPosition(sourcePosition);
-   m_pivot.getPosition();    
+   m_pivot.setPosition(sourcePosition);
+    
   }
 
   // Called once the command ends or is interrupted.
