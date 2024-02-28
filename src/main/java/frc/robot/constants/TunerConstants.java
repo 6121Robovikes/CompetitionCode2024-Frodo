@@ -31,6 +31,7 @@ public class TunerConstants {
         private static final Slot0Configs driveGains = new Slot0Configs()
             .withKP(3).withKI(0).withKD(0)
             .withKS(0).withKV(0).withKA(0);
+
     
         // The closed-loop output type to use for the steer motors;
         // This affects the PID/FF gains for the steer motors
@@ -41,7 +42,7 @@ public class TunerConstants {
     
         // The stator current at which the wheels start to slip;
         // This needs to be tuned to your individual robot
-        private static final double kSlipCurrentA = 300.0;
+        private static final double kSlipCurrentA = 60.0;              //TODO: Decrease this value to robot wheel slipping, Default was 300. I think it should be closer to 50 or 60.
     
         // Theoretical free speed (m/s) at 12v applied output;
         // This needs to be tuned to your individual robot

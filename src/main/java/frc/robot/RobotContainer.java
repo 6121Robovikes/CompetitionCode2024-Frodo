@@ -22,7 +22,7 @@ import frc.robot.commands.Source;
 import frc.robot.commands.Stow;
 import frc.robot.commands.Ground;
 import frc.robot.constants.TunerConstants;
-import frc.robot.subsystems.ClimberSubsystem;
+// import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -34,7 +34,8 @@ public class RobotContainer {
   private static final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private static final PivotSubsystem m_pivot = new PivotSubsystem();
   private static final IntakeSubsystem m_intake = new IntakeSubsystem();
-  private static final ClimberSubsystem m_climb = new ClimberSubsystem();
+  public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain;
+  // private static final ClimberSubsystem m_climb = new ClimberSubsystem();
 
 
   //drivetrain stuff... don't mess with it
@@ -44,7 +45,7 @@ public class RobotContainer {
   /* Setting up bindings for necessary control of the swerve drive platform */
   private final CommandXboxController m_controller = new CommandXboxController(0); // My controller
 
-  private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
+   // My drivetrain
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(0.1).withRotationalDeadband(0.1) // Add a 10% deadband
@@ -84,23 +85,29 @@ public class RobotContainer {
     //OPERATOR BINDINGS
 
     //stop shooter
-    JoystickButton shoot = new JoystickButton (m_joystick, 7);
-    shoot.toggleOnTrue(new Shoot(m_shooter, 20));
-    shoot.toggleOnFalse(new Shoot(m_shooter, 0));
+    // JoystickButton shoot = new JoystickButton (m_joystick, 7);
+    // shoot.toggleOnTrue(new Shoot(m_shooter, 20));
+    // shoot.toggleOnFalse(new Shoot(m_shooter, 0));
     
+    m_controller.a().whileTrue(new Shoot(m_shooter, 20));
+    m_controller.a().whileFalse(new Shoot(m_shooter, 0));
+    m_controller.b().whileTrue(new Source(m_pivot, m_intake));
+    m_controller.x().whileTrue(new Ground(m_pivot, m_intake));
+    m_controller.y().whileTrue(new Stow(m_pivot, m_intake));
     
-
   
 
-    //move arm to source, intake on
-    JoystickButton Source = new JoystickButton(m_joystick, 11);
-    Source.onTrue(new Source(m_pivot, m_intake));
+    // //move arm to source, intake on
+    // JoystickButton Source = new JoystickButton(m_joystick, 11);
+    // Source.onTrue(new Source(m_pivot, m_intake));
 
-    JoystickButton Ground = new JoystickButton(m_joystick, 9);
-    Ground.onTrue(new Ground(m_pivot, m_intake));
+    // JoystickButton Ground = new JoystickButton(m_joystick, 9);
+    // Ground.onTrue(new Ground(m_pivot, m_intake));
     
-    JoystickButton Stow = new JoystickButton(m_joystick, 10);
-    Stow.onTrue(new Stow(m_pivot, m_intake));
+    // JoystickButton Stow = new JoystickButton(m_joystick, 10);
+    // Stow.onTrue(new Stow(m_pivot, m_intake));
+
+    
 
 
     //move ar to amp, intake out

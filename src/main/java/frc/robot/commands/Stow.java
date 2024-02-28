@@ -33,6 +33,7 @@ public class Stow extends Command {
   public void execute() {
   
    m_pivot.setPosition(stowPosition);
+   m_intake.stopIntake();
     
   }
 

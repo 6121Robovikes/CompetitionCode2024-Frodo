@@ -19,7 +19,7 @@ public class Amp extends Command {
   public Amp(PivotSubsystem m_pivot)  //add , IntakeSubsystem m_intake 
   {
     this.m_pivot = m_pivot;
-    this.m_intake = m_intake;
+    // this.m_intake = m_intake;
 
     addRequirements( m_pivot); //m_intake
   
